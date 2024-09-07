@@ -1,14 +1,85 @@
 ---
 layout: default
-title: Your Portfolio
+title: {{ site.title }}
 ---
 
-<h1>Welcome to My Academic Portfolio</h1>
-<p>Here you can find my research, publications, and projects.</p>
+<div style="display: flex;">
+    <div style="width: 200px; padding: 20px;">
+        <img src="path/to/your/photo.jpg" alt="{{ site.author.name }}" style="width: 100%; border-radius: 50%;">
+        <h2>{{ site.author.name }}</h2>
+        <p>{{ site.author.bio }}</p>
+        <ul>
+            <li><a href="https://twitter.com/{{ site.author.twitter }}">Twitter</a></li>
+            <li><a href="https://linkedin.com/in/{{ site.author.linkedin }}">LinkedIn</a></li>
+            <li><a href="https://researchgate.net/profile/{{ site.author.researchgate }}">ResearchGate</a></li>
+        </ul>
+    </div>
 
-<!-- Optionally include links to your research, publications, etc. -->
-<ul>
-    <li><a href="/research.html">Research</a></li>
-    <li><a href="/publications.html">Publications</a></li>
-    <li><a href="/projects.html">Projects</a></li>
-</ul>
+    <div style="flex: 1; padding: 20px;">
+        <ul class="tabs">
+            <li><a href="#research" class="active" onclick="showTab('research')">Research</a></li>
+            <li><a href="#publications" onclick="showTab('publications')">Publications</a></li>
+            <li><a href="#projects" onclick="showTab('projects')">Projects</a></li>
+        </ul>
+
+        <div id="research" class="tab-content">
+            <h3>Research</h3>
+            <p>Your research details go here.</p>
+        </div>
+
+        <div id="publications" class="tab-content" style="display:none;">
+            <h3>Publications</h3>
+            <p>Your publications list goes here.</p>
+        </div>
+
+        <div id="projects" class="tab-content" style="display:none;">
+            <h3>Projects</h3>
+            <p>Your projects showcase goes here.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function showTab(tabName) {
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabContents.forEach(content => {
+        content.style.display = 'none'; // Hide all tab contents
+    });
+    document.getElementById(tabName).style.display = 'block'; // Show selected tab content
+
+    const tabs = document.querySelectorAll('.tabs li a');
+    tabs.forEach(tab => {
+        tab.classList.remove('active'); // Remove active class from all tabs
+    });
+    document.querySelector(`.tabs a[href="#${tabName}"]`).classList.add('active'); // Add active class to selected tab
+}
+</script>
+
+<style>
+.tabs {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+
+.tabs li {
+    margin-right: 20px;
+}
+
+.tabs a {
+    text-decoration: none;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-bottom: none;
+}
+
+.tabs a.active {
+    border-color: #ccc;
+    font-weight: bold;
+}
+
+.tab-content {
+    margin-top: 20px;
+}
+</style>
